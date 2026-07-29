@@ -2,8 +2,9 @@
    WEDDING DATE
 =================================== */
 
+
 // Change this to your wedding date & time
-const weddingDate = new Date("August 29, 2026 11:30:00").getTime();
+const weddingDate = new Date("August 29, 2026 12:00:00").getTime();
 
 
 /* ===================================
@@ -68,8 +69,7 @@ const countdown = setInterval(function(){
 =================================== */
 
 const sections = document.querySelectorAll(
-".details,.verse,.couple,.video,.location,.rsvp" 
-/* Deleted RSVP section need to deleted rsvp from here too*/
+".details,.verse,.couple,.video,.location" 
 );
 
 sections.forEach(function(section){
@@ -154,42 +154,113 @@ window.addEventListener("load", function () {
 
         }, 1000);
 
-    }, 2500);
+    }, 1200);
 
 });
+
+document.fonts.ready.then(() => {
+
+    document.getElementById("loader").style.visibility = "visible";
+
+});	
+
 /* ===========================
    BACKGROUND MUSIC
 =========================== */
-
 const music = document.getElementById("bgmusic");
 
 const musicBtn = document.getElementById("musicBtn");
 
-let playing = false;
+const weddingVideo = document.getElementById("weddingVideo");
 
-musicBtn.onclick = function () {
+/* ===========================
+   MUSIC FADE FUNCTIONS
+=========================== */
 
-    if (!playing) {
+function fadeOutMusic(duration = 500) {
 
-        music.play();
+    music.muted = false;
 
-        musicBtn.innerHTML = "🔇";
+    const step = 50;
+    const fadeAmount = music.volume / (duration / step);
 
-        playing = true;
+    const fade = setInterval(() => {
 
-    }
+        if (music.volume > fadeAmount) {
 
-    else {
+            music.volume -= fadeAmount;
 
-        music.pause();
+        } else {
 
-        musicBtn.innerHTML = "🔊";
+            music.volume = 0;
+            music.muted = true;
+            clearInterval(fade);
 
-        playing = false;
+        }
 
-    }
+    }, step);
 
-};
+}
+
+
+function fadeInMusic(duration = 500) {
+
+    music.muted = false;
+    music.volume = 0;
+
+    const step = 50;
+    const fadeAmount = 1 / (duration / step);
+
+    const fade = setInterval(() => {
+
+        if (music.volume < 1 - fadeAmount) {
+
+            music.volume += fadeAmount;
+
+        } else {
+
+            music.volume = 1;
+            clearInterval(fade);
+
+        }
+
+    }, step);
+
+}
+
+if (weddingVideo) {
+
+    weddingVideo.addEventListener("play", function () {
+
+        fadeOutMusic();
+        musicBtn.textContent = "🔇";
+
+    });
+
+    weddingVideo.addEventListener("pause", function () {
+
+        fadeInMusic();
+        musicBtn.textContent = "🔊";
+
+    });
+
+    weddingVideo.addEventListener("ended", function () {
+
+        fadeInMusic();
+        musicBtn.textContent = "🔊";
+
+    });
+
+}
+
+musicBtn.addEventListener("click", function () {
+
+    music.muted = !music.muted;
+
+    musicBtn.textContent = music.muted ? "🔇" : "🔊";
+
+});
+
 /* ===========================
    SCROLL TO TOP BUTTON
 =========================== */
@@ -223,3 +294,175 @@ topBtn.onclick = function () {
     });
 
 };
+
+/* ===========================
+   SCROLL REVEAL
+=========================== */
+
+const hiddenElements = document.querySelectorAll(".hidden");
+
+const observer = new IntersectionObserver((entries) => {
+
+    entries.forEach(entry => {
+
+        if (entry.isIntersecting) {
+
+            entry.target.classList.add("show");
+
+        }
+
+    });
+
+});
+
+hiddenElements.forEach(el => observer.observe(el));
+
+/* ===========================
+   ROSE PETALS
+=========================== */
+
+const petals = document.getElementById("petals");
+
+const petalImages = [
+    "assets/rose-petal-1.png",
+    "assets/rose-petal-2.png"
+    ];
+
+for (let i = 0; i < 20; i++) {
+
+    const petal = document.createElement("img");
+
+    petal.className = "petal";
+
+    petal.src = petalImages[Math.floor(Math.random() * petalImages.length)];
+
+    petal.style.left = Math.random() * 100 + "vw";
+
+    petal.style.width = (18 + Math.random() * 18) + "px";
+
+    petal.style.animationDuration = (10 + Math.random() * 8) + "s";
+
+    petal.style.animationDelay = Math.random() * 8 + "s";
+
+    petals.appendChild(petal);
+
+}
+
+/* ===================================
+   COUPLE ANIMATION
+=================================== */
+
+const frames = [
+    "images/frame1.png",
+    "images/frame2.png",
+    "images/frame3.png",
+    "images/frame4.png",
+    "images/frame5.png",
+    "images/frame6.png"
+];
+
+const coupleFrame = document.getElementById("coupleFrame");
+
+let currentFrame = 0;
+
+setInterval(function(){
+
+    currentFrame++;
+
+    if(currentFrame >= frames.length){
+        currentFrame = 0;
+    }
+
+    coupleFrame.src = frames[currentFrame];
+
+},700);
+
+function openInvitation() {
+    
+    // Start music
+    music.volume = 1;
+
+    music.play().then(() => {
+
+        musicBtn.textContent = "🔊";
+
+    }).catch(err => {
+
+        console.log(err);
+
+    });
+
+    // Scroll to invitation
+    document.querySelector("#details").scrollIntoView({
+        behavior: "smooth"
+    });
+
+}
+
+const heart = document.getElementById("loveHeart");
+const heartHint = document.getElementById("heartHint");
+const heartArrow = document.getElementById("heartArrow");
+
+let invitationStarted = false;
+
+heart.addEventListener("click", function () {
+
+    if (invitationStarted) return;
+
+    invitationStarted = true;
+
+    heart.classList.add("pop");
+    
+    setTimeout(() => {
+
+    heart.style.display = "none";
+
+    heartArrow.classList.remove("hidden-heart");
+    heartArrow.classList.add("show-heart");
+
+},500);
+
+    heartHint.style.display = "none";
+
+    music.play().then(() => {
+
+        musicBtn.textContent = "🔊";
+
+    }).catch(console.log);
+
+    setTimeout(() => {
+
+        heart.classList.remove("pop");
+
+    },450);
+
+});
+
+function createSparkles(){
+
+    const container = document.querySelector(".heart-container");
+
+    for(let i=0;i<8;i++){
+
+        const sparkle = document.createElement("span");
+
+        sparkle.className = "sparkle";
+
+        const angle = Math.random()*Math.PI*2;
+        const distance = 40 + Math.random()*20;
+
+        const x = Math.cos(angle)*distance;
+        const y = Math.sin(angle)*distance;
+
+        sparkle.style.setProperty("--x",`${x}px`);
+        sparkle.style.setProperty("--y",`${y}px`);
+
+        container.appendChild(sparkle);
+
+        sparkle.addEventListener("animationend",()=>{
+            sparkle.remove();
+        });
+
+    }
+
+}

@@ -6,12 +6,19 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-<title>Mohammed Zubair ❤️ Fareeha Anjum</title>
+<title>Zubair ❤️ Farikha  </title>
 
 <link rel="stylesheet" href="style.css">
 
+<link rel="preconnect" href="https://fonts.googleapis.com">
+
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
 <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
 
+<!--
+<link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700&family=Great+Vibes&family=Poppins:wght@300;400;500;600&display=swap" rel="stylesheet">
+-->
 </head>
 
 <body>
@@ -21,17 +28,57 @@
 
     <div class="loader-content">
 
-        <h2>Bismillahir Rahmanir Rahim</h2>
+    <p class="from-text">From</p>
 
-        <p>Preparing Your Invitation...</p>
+    <h2 class="sender-name">
+        Mohamed Jaffer M.R.
+    </h2>
 
-    </div>
+    <p class="and-text">&</p>
 
+    <h2 class="sender-name">
+        Seema S
+    </h2>
+
+</div>
 </div>
 
 <!-- Floating Background -->
 
-<div class="floating-bg"></div>
+<div class="floating-bg">
+<!--
+<div id="welcomeScreen">
+
+    <div class="welcome-content">
+
+        <p class="bismillah">
+            بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ
+        </p>
+
+        <h1>
+            Mohamed Zubair
+            <br>
+            &
+            <br>
+            Farikha  Anjum
+        </h1>
+
+        <p>
+            Request the honour of your presence
+            at our Wedding Ceremony
+        </p>
+
+        <button id="openInvitation">
+            Open Invitation
+        </button>
+
+    </div>
+
+</div>-->
+
+</div>
+
+<div id="petals"></div>
 
 <!-- Hero Section -->
 
@@ -39,32 +86,51 @@
 
 <div class="overlay">
 
-<h3>Bismillahir Rahmanir Rahim</h3>
 
-<h1>Mohammed Zubair</h1>
+<h3>بِسْمِ ٱللَّٰهِ ٱلرَّحْمَٰنِ ٱلرَّحِيمِ</h3>
 
-<div class="heart">❤</div>
+<p class="arabicengtransalation">
+In the name of Allah, <br>
+the Most Beneficent, the Most Merciful.
+</p>
 
-<h1>Fareeha Anjum</h1>
+<h1>Mohamed Zubair</h1>
+
+<div class="heart-container">
+
+    <div id="loveHeart" class="heart">
+         <span>❤</span>
+    	    <span>❤</span>
+    </div>
+	<img
+        id="heartArrow"
+        class="love-heart-img hidden-heart"
+        src="images/heart-arrow.png"
+        alt="Join Hearts">
+        
+    <p id="heartHint" class="heart-hint">
+        ✨ Tap the heart to begin
+    </p>
+
+</div>
+
+<h1>Farikha  Anjum</h1>
 
 <p class="invite">
 
-Together with our beloved families,
-
-we warmly invite you to celebrate
-
-our Wedding Ceremony.
+Request the honour of your presence at our Wedding Ceremony.
 
 </p>
 
 <a href="#details">
 
-<button class="btn pulse">
+<div class="open-wrapper">
 
-Open Invitation
+    <button class="btn pulse" onclick="openInvitation()">
+        Open Invitation
+    </button>
 
-</button>
-
+</div>
 </a>
 
 </div>
@@ -73,7 +139,7 @@ Open Invitation
 
 <!-- Countdown -->
 
-<section class="countdown">
+<section class="countdown hidden">
 
 <h2>Wedding Countdown</h2>
 
@@ -129,23 +195,23 @@ Open Invitation
 
 <p>29 August 2026</p>
 
-<p>11:30 AM</p>
+<p>12:00 PM</p>
 
-<p>Venue Name Here</p>
+<p>Tamil Nadu Hajj Service Society (Hajj House)</p>
 
 </div>
 
 <div class="card">
 
-<h3>Reception</h3>
+<h3>Valima</h3>
 
-<p>Saturday Evening</p>
+<p>Saturday</p>
 
 <p>29 August 2026</p>
 
-<p>7:00 PM</p>
+<p>1:00 PM</p>
 
-<p>Venue Name Here</p>
+<p>Tamil Nadu Hajj Service Society (Hajj House)</p>
 
 </div>
 
@@ -156,6 +222,10 @@ Open Invitation
 <section class="verse">
 
 <h2>Quran Verse</h2>
+
+<p>
+وَمِنْ آيَاتِهِ أَنْ خَلَقَ لَكُمْ مِنْ أَنْفُسِكُمْ أَزْوَاجًا لِتَسْكُنُوا إِلَيْهَا وَجَعَلَ بَيْنَكُمْ مَوَدَّةً وَرَحْمَةً ۚ إِنَّ فِي ذَٰلِكَ لَآيَاتٍ لِقَوْمٍ يَتَفَكَّرُونَ
+</p>
 
 <p>
 
@@ -175,7 +245,9 @@ from among yourselves so that you may find tranquillity in them."
 
 <h2>The Happy Couple</h2>
 
-<img src="images/bride-groom.png" alt="Bride Groom">
+<img id="coupleFrame"
+         src="images/frame1.png"
+         alt="Bride Groom">
 
 </section>
 
@@ -185,9 +257,9 @@ from among yourselves so that you may find tranquillity in them."
 
 <h2>Wedding Invitation Video</h2>
 
-<video controls>
+<video id="weddingVideo" controls>
 
-<source src="video/invitation.mp4" type="video/mp4">
+    <source src="video/invitation.mp4" type="video/mp4">
 
 </video>
 
@@ -198,8 +270,11 @@ from among yourselves so that you may find tranquillity in them."
 <section class="location">
 
 <h2>Venue Location</h2>
+<h3>
+TAMIL NADU HAJJ SERVICE SOCIETY (HAJJ HOUSE) </h3>
+<p> No. 3, Demellows Road, Choolai, Chennai - 600 112. </p>
 
-<a href="https://maps.google.com" target="_blank">
+<a href="https://maps.app.goo.gl/KLW3Ze6tSVZyoc3r6" target="_blank">
 
 <button class="btn">
 
@@ -222,11 +297,14 @@ Thank You
 
 </h3>
 
+<h1> 
+بَارَكَ اللَّهُ لَكَ، وَبَارَكَ عَلَيْكَ، وَجَمَعَ بَيْنَكُمَا فِي خَيْرٍ
+</h1>
+
 <p>
-
-We look forward to celebrating this joyous occasion with you.
-
+May Allah bless you, shower His blessings upon you, and join you together in goodness.
 </p>
+
 
 <p>
 
@@ -235,8 +313,6 @@ Made with ❤️ for our family & friends.
 </p>
 
 </footer>
-
-<script src="script.js"></script>
 
 <audio id="bgmusic" loop>
 
@@ -247,8 +323,6 @@ Made with ❤️ for our family & friends.
 <button id="musicBtn">
 
 🔊
-
-</button>
 
 </button>
 
