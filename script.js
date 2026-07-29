@@ -171,6 +171,8 @@ const music = document.getElementById("bgmusic");
 
 const musicBtn = document.getElementById("musicBtn");
 
+musicBtn.textContent = "🔇";
+
 const weddingVideo = document.getElementById("weddingVideo");
 
 let musicStarted = false;
