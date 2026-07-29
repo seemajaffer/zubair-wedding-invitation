@@ -332,29 +332,29 @@ body.lock-scroll {
 /* Hint */
 
 /* Hint */
+
 .heart-hint{
 
-    position: absolute;
+    position:absolute;
 
-    bottom: 75px;      /* Controls how high the hint appears */
+    bottom:75px;
 
-    left: 50%;
-    transform: translateX(-50%);
+    left:50%;
+    transform:translateX(-50%);
 
-    color: #D4AF37;
-    font-size: 14px;
+    color:#D4AF37;
+    font-size:14px;
 
-    text-align: center;
-    white-space: nowrap;
+    text-align:center;
+    white-space:nowrap;
 
-    opacity: 0;
+    opacity:0;
 
-    
-    animation:
-    hintAnimation 6s forwards,
-    hintFloat 2s ease-in-out infinite;
-
+   animation: hintFloat 2s ease-in-out infinite;
+opacity: 0;
+transition: opacity 0.6s ease;
 }
+
 @keyframes hintAnimation{
 
     0%,30%{
@@ -382,6 +382,7 @@ body.lock-scroll {
     }
 
 }
+
 
 /* ===========================
    COUNTDOWN

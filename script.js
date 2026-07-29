@@ -173,6 +173,31 @@ const musicBtn = document.getElementById("musicBtn");
 
 const weddingVideo = document.getElementById("weddingVideo");
 
+let musicStarted = false;
+
+async function startBackgroundMusic() {
+
+    if (musicStarted) return;
+
+    try {
+
+        music.volume = 1;
+        music.muted = false;
+
+        await music.play();
+
+        musicStarted = true;
+
+        musicBtn.textContent = "🔊";
+
+    } catch (err) {
+
+        console.log(err);
+
+    }
+
+}
+
 /* ===========================
    MUSIC FADE FUNCTIONS
 =========================== */
@@ -253,14 +278,22 @@ if (weddingVideo) {
 
 }
 
-musicBtn.addEventListener("click", function () {
+musicBtn.addEventListener("click", async function () {
 
+    // First click ever → Start music
+    if (!musicStarted) {
+
+        await startBackgroundMusic();
+        return;
+
+    }
+
+    // Afterwards → Normal mute/unmute
     music.muted = !music.muted;
 
     musicBtn.textContent = music.muted ? "🔇" : "🔊";
 
 });
-
 /* ===========================
    SCROLL TO TOP BUTTON
 =========================== */
@@ -380,18 +413,8 @@ setInterval(function(){
 function openInvitation() {
     
     // Start music
-    music.volume = 1;
-
-    music.play().then(() => {
-
-        musicBtn.textContent = "🔊";
-
-    }).catch(err => {
-
-        console.log(err);
-
-    });
-
+    startBackgroundMusic();
+    
     // Scroll to invitation
     document.querySelector("#details").scrollIntoView({
         behavior: "smooth"
@@ -401,6 +424,43 @@ function openInvitation() {
 
 const heart = document.getElementById("loveHeart");
 const heartHint = document.getElementById("heartHint");
+function flashHint() {
+
+    let count = 0;
+
+    const flash = setInterval(() => {
+
+        if (invitationStarted) {
+            clearInterval(flash);
+            heartHint.style.opacity = "0";
+            return;
+        }
+
+        heartHint.style.opacity = heartHint.style.opacity == "1" ? "0" : "1";
+
+        count++;
+
+        if (count >= 6) {   // 6 toggles = 3 fade in/out cycles
+
+            clearInterval(flash);
+
+            heartHint.style.opacity = "0";
+
+            if (!invitationStarted) {
+
+                setTimeout(flashHint, 3000); // Wait 3 seconds then repeat
+
+            }
+
+        }
+
+    }, 700);
+
+}
+
+flashHint();
+
+
 const heartArrow = document.getElementById("heartArrow");
 
 let invitationStarted = false;
@@ -424,12 +484,7 @@ heart.addEventListener("click", function () {
 
     heartHint.style.display = "none";
 
-    music.play().then(() => {
-
-        musicBtn.textContent = "🔊";
-
-    }).catch(console.log);
-
+    startBackgroundMusic();
     setTimeout(() => {
 
         heart.classList.remove("pop");
